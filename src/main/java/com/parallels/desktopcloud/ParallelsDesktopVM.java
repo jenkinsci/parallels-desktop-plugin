@@ -25,11 +25,16 @@
 package com.parallels.desktopcloud;
 
 import hudson.Extension;
+import hudson.Functions;
 import hudson.model.Describable;
 import hudson.model.Descriptor;
+import hudson.model.Slave;
 import hudson.slaves.ComputerLauncher;
+import hudson.slaves.NodeProperty;
+import hudson.slaves.NodePropertyDescriptor;
 import hudson.util.ListBoxModel;
 import java.lang.reflect.Field;
+import java.util.List;
 import java.util.logging.Level;
 import jenkins.model.Jenkins;
 import org.kohsuke.stapler.DataBoundConstructor;
@@ -60,17 +65,19 @@ public class ParallelsDesktopVM implements Describable<ParallelsDesktopVM>
 	private final String remoteFS;
 	private transient String slaveName;
 	private final ComputerLauncher launcher;
+	private ParallelsDesktopNodeProperties nodeProperties;
 	private transient boolean provisioned = false;
 	private PostBuildBehaviors postBuildBehavior;
 	private transient VMStates prevVmState;
 
 	@DataBoundConstructor
-	public ParallelsDesktopVM(String vmid, String labels, String remoteFS, ComputerLauncher launcher, String postBuildBehavior)
+	public ParallelsDesktopVM(String vmid, String labels, String remoteFS, ComputerLauncher launcher, String postBuildBehavior, ParallelsDesktopNodeProperties nodeProperties)
 	{
 		this.vmid = vmid;
 		this.labels = labels;
 		this.remoteFS = remoteFS;
 		this.launcher = launcher;
+		this.nodeProperties = nodeProperties;
 		try
 		{
 			this.postBuildBehavior = PostBuildBehaviors.valueOf(postBuildBehavior);
@@ -112,6 +119,16 @@ public class ParallelsDesktopVM implements Describable<ParallelsDesktopVM>
 	public String getSlaveName()
 	{
 		return slaveName;
+	}
+
+	public ParallelsDesktopNodeProperties getNodeProperties()
+	{
+		return nodeProperties;
+	}
+
+	public void setNodeProperties(ParallelsDesktopNodeProperties nodeProperties)
+	{
+		this.nodeProperties = nodeProperties;
 	}
 
 	public void setProvisioned(boolean provisioned)
@@ -242,6 +259,10 @@ public class ParallelsDesktopVM implements Describable<ParallelsDesktopVM>
 			m.add(Messages.Parallels_Behavior_KeepRunning(), PostBuildBehaviors.KeepRunning.name());
 			m.add(Messages.Parallels_Behavior_ReturnPrevState(), PostBuildBehaviors.ReturnPrevState.name());
 			return m;
+		}
+
+		public List<NodePropertyDescriptor> getNodePropertyDescriptors() {
+			return Functions.getNodePropertyDescriptors(Slave.class);
 		}
 	}
 }
