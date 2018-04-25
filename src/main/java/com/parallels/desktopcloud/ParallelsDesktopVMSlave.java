@@ -29,7 +29,6 @@ import hudson.slaves.AbstractCloudSlave;
 import hudson.model.TaskListener;
 import hudson.slaves.AbstractCloudComputer;
 import hudson.model.Node.Mode;
-import hudson.slaves.NodeProperty;
 import hudson.Extension;
 import hudson.model.Node;
 import hudson.slaves.EphemeralNode;
@@ -50,7 +49,7 @@ public class ParallelsDesktopVMSlave extends AbstractCloudSlave implements Ephem
 			throws IOException, Descriptor.FormException
 	{
 		super(vm.getSlaveName(), "", vm.getRemoteFS(), 1, Mode.NORMAL, vm.getLabels(), vm.getLauncher(),
-				new ParallelsDesktopCloudRetentionStrategy(), new ArrayList<NodeProperty<?>>());
+				new ParallelsDesktopCloudRetentionStrategy(), vm.getNodeProperties());
 		this.connector = connector;
 		this.vm = vm;
 	}

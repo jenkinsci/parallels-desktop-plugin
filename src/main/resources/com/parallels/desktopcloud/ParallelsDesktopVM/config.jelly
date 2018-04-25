@@ -61,4 +61,6 @@ THE SOFTWARE.
 			</f:dropdownListBlock>
 		</j:forEach>
 	</f:dropdownList>
+
+	<f:descriptorList title="${%Node Properties}" descriptors="${descriptor.getNodePropertyDescriptors()}" field="nodeProperties" />
 </j:jelly>
