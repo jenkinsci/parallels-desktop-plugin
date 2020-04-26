@@ -95,7 +95,7 @@ public class ParallelsDesktopCloudRetentionStrategy extends RetentionStrategy<Pa
 		@Override
 		public String getDisplayName()
 		{
-			return "ParallelsDesktop Cloud Retention Strategy";
+			return "Keep-Until-Idle Retention Strategy";
 		}
 	}
 }
