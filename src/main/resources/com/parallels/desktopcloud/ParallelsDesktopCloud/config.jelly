@@ -30,14 +30,14 @@ THE SOFTWARE.
 		<f:textbox default="Parallels Desktop Cloud"/>
 	</f:entry>
 
-	<f:section title="${%Host slave}">
+	<f:section title="${%Host Agent}">
 		<f:entry title="${%Labels}" field="labelString">
 			<f:textbox/>
 		</f:entry>
 		<f:entry title="${%Remote FS root}" field="remoteFS">
 			<f:textbox/>
 		</f:entry>
-		<f:entry name="useAsBuilder" title="${%Use host slave for build tasks}" field="useConnectorAsBuilder">
+		<f:entry name="useAsBuilder" title="${%Use host agent for build tasks}" field="useConnectorAsBuilder">
 			<f:checkbox/>
 		</f:entry>
 		<f:dropdownList name="pdLauncher" title="${%Secondary launch method}"
@@ -60,7 +60,7 @@ THE SOFTWARE.
 		</f:dropdownList>
 	</f:section>
 
-	<f:section title="${%Virtual Machines}" description="${%List of virtual machines to be launched as slaves}">
+	<f:section title="${%Virtual Machines}" description="${%List of virtual machines to be launched as agents}">
 		<f:entry>
 			<f:repeatable field="vms">
 				<div>

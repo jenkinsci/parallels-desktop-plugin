@@ -1,3 +1,6 @@
+[![Jenkins Plugin](https://img.shields.io/jenkins/plugin/v/parallels-desktop.svg)](https://plugins.jenkins.io/parallels-desktop)
+[![Jenkins Plugin Installs](https://img.shields.io/jenkins/plugin/i/parallels-desktop.svg?color=blue)](https://plugins.jenkins.io/parallels-desktop)
+
 # Parallels Desktop Cloud Plugin #
 
 With the Jenkins plugin, Parallels Desktop virtual machines are launched dynamically whenever they are needed to build jobs, and then suspended during idle time, for high-density usage of resources.
@@ -11,13 +14,13 @@ Guest OS support:
 
 Requirements:
 * [Jenkins LTS](https://jenkins-ci.org/changelog-stable), 1.609.2 or later. Previous versions may work, but are not tested
-* [Parallels Desktop 11](http://www.parallels.com/products/desktop/) Pro or Business edition
+* [Parallels Desktop](http://www.parallels.com/products/desktop/), 11 or later. Pro or Business edition
 
 ## Configuration ##
 
 First you must configure a host machine on which Parallels Desktop is installed. Enable "Remote Login" in OS X "Sharing" settings to allow incoming SSH connections.
 
-Then make sure that you have Java 1.7.0 or greater on your virtual machines. Otherwise Jenkins will be unable to start slaves on them.
+Then make sure that you have Java 1.7.0 or greater on your virtual machines. Otherwise Jenkins will be unable to start agents on them.
 
 ### Cloud Configuration ###
 
@@ -25,20 +28,20 @@ Then make sure that you have Java 1.7.0 or greater on your virtual machines. Oth
 * Scroll down to the "Cloud" Section and click "Add a new cloud".
 * Then configure the connection to the host with Parallels Desktop (substitute host name and other parameters as appropriate).
 
-![alt tag](https://raw.githubusercontent.com/Parallels/jenkins-parallels/master/src/main/resources/cloud_config.png?token=AGasieKI4XsJMblErXOWrlR2n7QOlyzxks5V3HPqwA%3D%3D)
+![alt tag](src/main/resources/cloud_config.png)
 
-### Slave Configuration ###
+### Agent Configuration ###
 
 * In the same "Cloud" section, under "Virtual Machines" click "Add".
-* In Virtual Machine ID you can either specify the VM name or UUID (which you can find from Terminal by entering "prlctl list -a").
-* Fill in the rest of config as you would for the regular slave, but skip "Host", since it will be configured dynamically.
+* In Virtual Machine ID you can either specify the VM name or UUID (which you can find from Terminal by entering `prlctl list -a`).
+* Fill in the rest of config as you would for the regular agent, but skip "Host", since it will be configured dynamically.
 * Specify Labels that you will bind "cloud" jobs to.
 
-![alt tag](https://raw.githubusercontent.com/Parallels/jenkins-parallels/master/src/main/resources/slave_config.png?token=AGasiSnBRAeyZgiq8VkF3CSicTs97cfyks5V3HPFwA%3D%3D)
+![alt tag](src/main/resources/agent_config.png)
 
 ## Usage ##
 
-Now in any of the build jobs you can set Labels to one of those you configured in your VMs during the Slave Configuration step.
+Now in any of the build jobs you can set Labels to one of those you configured in your VMs during the Agent Configuration step.
 
 When your job is scheduled and there are not enough executors to perform the build, the plugin will find a suitable virtual machine, start it, and use it to build the job. Then after approximately 1 minute of inactivity the VM will be stopped.
 

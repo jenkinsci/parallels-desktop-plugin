@@ -36,7 +36,7 @@ THE SOFTWARE.
 	<packaging>hpi</packaging>
 
 	<name>Parallels Desktop Cloud</name>
-	<url>https://wiki.jenkins-ci.org/display/JENKINS/Parallels+Desktop+Cloud+Plugin</url>
+	<url>https://github.com/jenkinsci/parallels-desktop-plugin</url>
 	<licenses>
 		<license>
 			<name>MIT License</name>
