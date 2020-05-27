@@ -1,3 +1,6 @@
+[![Jenkins Plugin](https://img.shields.io/jenkins/plugin/v/parallels-desktop.svg)](https://plugins.jenkins.io/parallels-desktop)
+[![Jenkins Plugin Installs](https://img.shields.io/jenkins/plugin/i/parallels-desktop.svg?color=blue)](https://plugins.jenkins.io/parallels-desktop)
+
 # Parallels Desktop Cloud Plugin #
 
 With the Jenkins plugin, Parallels Desktop virtual machines are launched dynamically whenever they are needed to build jobs, and then suspended during idle time, for high-density usage of resources.
@@ -11,7 +14,7 @@ Guest OS support:
 
 Requirements:
 * [Jenkins LTS](https://jenkins-ci.org/changelog-stable), 1.609.2 or later. Previous versions may work, but are not tested
-* [Parallels Desktop 11](http://www.parallels.com/products/desktop/) Pro or Business edition
+* [Parallels Desktop](http://www.parallels.com/products/desktop/), 11 or later. Pro or Business edition
 
 ## Configuration ##
 
@@ -30,7 +33,7 @@ Then make sure that you have Java 1.7.0 or greater on your virtual machines. Oth
 ### Slave Configuration ###
 
 * In the same "Cloud" section, under "Virtual Machines" click "Add".
-* In Virtual Machine ID you can either specify the VM name or UUID (which you can find from Terminal by entering "prlctl list -a").
+* In Virtual Machine ID you can either specify the VM name or UUID (which you can find from Terminal by entering `prlctl list -a`).
 * Fill in the rest of config as you would for the regular slave, but skip "Host", since it will be configured dynamically.
 * Specify Labels that you will bind "cloud" jobs to.
 
