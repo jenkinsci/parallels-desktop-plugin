@@ -61,4 +61,19 @@ THE SOFTWARE.
 			</f:dropdownListBlock>
 		</j:forEach>
 	</f:dropdownList>
+
+	<f:dropdownList name="retentionStrategy" title="${%Retention Strategy}">
+		<j:forEach var="d" items="${descriptor.getRetentionStrategyDescriptors()}">
+			<f:dropdownListBlock value="${d.clazz.name}" name="${d.displayName}"
+									selected="${instance.retentionStrategy!=null and d.equals(instance.retentionStrategy.descriptor)}"
+									title="${d.displayName}">
+				<j:set var="descriptor" value="${d}"/>
+				<j:set var="instance" value="${(instance.retentionStrategy!=null and d.equals(instance.retentionStrategy.descriptor)) ? instance.retentionStrategy : null}"/>
+				<f:invisibleEntry>
+						<input type="hidden" name="stapler-class" value="${d.clazz.name}"/>
+				</f:invisibleEntry>
+				<st:include from="${d}" page="${d.configPage}" optional="true"/>
+			</f:dropdownListBlock>
+		</j:forEach>
+	</f:dropdownList>
 </j:jelly>
