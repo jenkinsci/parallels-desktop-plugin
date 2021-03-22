@@ -50,7 +50,7 @@ public class ParallelsDesktopVMSlave extends AbstractCloudSlave implements Ephem
 			throws IOException, Descriptor.FormException
 	{
 		super(vm.getSlaveName(), "", vm.getRemoteFS(), 1, Mode.NORMAL, vm.getLabels(), vm.getLauncher(),
-				new ParallelsDesktopCloudRetentionStrategy(), new ArrayList<NodeProperty<?>>());
+				vm.getRetentionStrategy(), new ArrayList<NodeProperty<?>>());
 		this.connector = connector;
 		this.vm = vm;
 	}
